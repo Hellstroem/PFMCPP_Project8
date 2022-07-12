@@ -56,6 +56,12 @@ your task:
 #include <algorithm>
 #include <cassert>
 
+#include "Highway.h"
+#include "Car.h"
+#include "Motorcycle.h"
+#include "SemiTruck.h"
+#include "HighwayPatrol.h"
+
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
@@ -106,7 +112,7 @@ int main()
      In order to correctly construct an object in-place inside a vector, we must first reserve space for it.
      
      reserve how ever many cars, motorcycles, and trucks you'll create first
-     */
+     
     cars.reserve(3); //reserving room for 3 Car instances
     
     /*
@@ -115,7 +121,7 @@ int main()
      
      use the vector member function 'emplace_back' to construct your car/truck/motorcycle instances in-place
      */
-    cars.emplace_back("janice"); //constructing the first Car instance in-place in the cars vector
+    //constructing the first Car instance in-place in the cars vector
     
     /*
      construct 2 more Car instances via emplace_back.
@@ -124,11 +130,35 @@ int main()
     /*
      now reserve and emplace_back your Trucks and Motorcyles
      */
+    cars.reserve(3);
+    cars.emplace_back("janice");
+    cars.emplace_back("viper");
+    cars.emplace_back("henry");
+    motorcycles.reserve(2);
+    motorcycles.emplace_back("fasty");
+    motorcycles.emplace_back("h-son"); 
+    trucks.reserve(1);
+    trucks.emplace_back("trucko");
+  
+
+
     
+    for(auto& element: cars)
+    {
+        highway.addVehicle(dynamic_cast<Vehicle*>(&element));
+    }
+
+    for(auto& element: motorcycles)
+    {
+        highway.addVehicle(dynamic_cast<Vehicle*>(&element));
+    }
+
+    for(auto& element: trucks)
+    {
+        highway.addVehicle(dynamic_cast<Vehicle*>(&element));
+    }
     
-    
-    
-    assert(false);
+
     //add the cars, motorcycles and trucks to the highway using range-based for() loops: for( element : vec ) { ... }
     //be careful to not accidentally make element copies when iterating.
     
